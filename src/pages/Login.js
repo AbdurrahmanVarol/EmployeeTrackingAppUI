@@ -1,11 +1,12 @@
 import React, { useState,useContext } from 'react'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Col, Form, FormGroup, Input, Row } from 'reactstrap';
 import DefaultContext from '../contexts/DefaultContext';
 
 function Login() {
   const {setToken} = useContext(DefaultContext);
   const [user, setUser] = useState();
+  const navigate = useNavigate()
 
   const changeHandler = (event) => {
     let name = event.target.name;
@@ -27,9 +28,12 @@ function Login() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if(data.isLoginSuccess)
+        if(data.isLoginSuccess){
+
           setToken(data.token);
+        }
       });
+      navigate("/")
   }
 
   return (

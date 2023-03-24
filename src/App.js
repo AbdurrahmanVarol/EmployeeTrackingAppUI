@@ -6,6 +6,10 @@ import Register from './pages/Register';
 import AuthLayout from './layouts/AuthLayout';
 import DefaultLayout from './layouts/DefaultLayout';
 import Home from './pages/Home';
+import Employees from './pages/Employees';
+import EmployeeDetails from './pages/EmployeeDetails';
+import CreateTicket from './pages/CreateTicket';
+import UnAssignedTickets from './pages/UnAssignedTickets';
 
 function App() {
   return (
@@ -14,10 +18,14 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={<DefaultLayout></DefaultLayout>}>
-              <Route index element={<Home></Home>}></Route>
+              <Route path='/' element={<Home></Home>}></Route>
+              <Route path='/employees' element={<Employees></Employees>}></Route>
+              <Route path='/employeeDetails' element={<EmployeeDetails></EmployeeDetails>}></Route>
+              <Route path='/createTicket' element={<CreateTicket></CreateTicket>}></Route>
+              <Route path='/unassignedTickets' element={<UnAssignedTickets></UnAssignedTickets>}></Route>
             </Route>
             <Route element={<AuthLayout></AuthLayout>}>
-              <Route path="/login" element={<Login />}></Route>
+              <Route index path="/login" element={<Login />}></Route>
               <Route path="/register" element={<Register />}></Route>
             </Route>
           </Routes>

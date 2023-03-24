@@ -5,6 +5,7 @@ const DefaultContext =  createContext();
 export const DefaultContextProvider = ({children}) =>{
 
     const [token,setToken] = useState()
+    const [userRole,setUserRole] = useState(1)
 
     useEffect(() => {
       localStorage.setItem("token", token);
@@ -12,7 +13,10 @@ export const DefaultContextProvider = ({children}) =>{
 
 
     const values = {
-
+        token,
+        setToken,
+        userRole,
+        setUserRole
     }
 
     return (

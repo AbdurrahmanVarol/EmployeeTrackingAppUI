@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import alertify from 'alertifyjs'
 import { NavLink } from 'react-router-dom'
 import { Form,Button, Col, FormGroup, Input, Row } from 'reactstrap'
 
@@ -27,6 +28,7 @@ function Register() {
       .then((data) => {
         console.log("asd")
       });
+      alertify.success("User Added!")
   }
   return (
     <div>

@@ -4,3 +4,18 @@
   background-repeat: no-repeat;
   
 }
+.default{
+  background-image: url("./images/bg-default-layout.jpg");
+  background-size:     cover;                
+  background-repeat:   no-repeat;
+  background-position: center center;   
+}
+
+.footer{
+  background-color: dimgrey;
+  height: 100px;
+}
+.disabledDiv {
+  pointer-events: none;
+  opacity: 0.8;
+}
