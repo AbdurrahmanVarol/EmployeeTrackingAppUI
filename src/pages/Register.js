@@ -4,7 +4,14 @@ import { NavLink } from 'react-router-dom'
 import { Form,Button, Col, FormGroup, Input, Row } from 'reactstrap'
 
 function Register() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({
+    firstName:"",
+    lastName:"",
+    userName:"",
+    email:"",
+    password:"",
+    passwordConfirm:""            
+  });
 
   const changeHandler = (event) => {
     let name = event.target.name;
@@ -16,19 +23,37 @@ function Register() {
   const registerHandler = (event)=>{
     event.preventDefault()
     console.log(user)
-    console.log("worked")
-    fetch("", {
+    
+    if(user.pasword !== user.paswordConfirm){
+      alertify.error("Password and password confirm must be equal")
+      return
+    }
+    
+    fetch("https://localhost:44333/api/Auth/register", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
-        "Content-type": "application/json; charset=UTF-8",
+        "Content-type": "application/json; charset=UTF-8"
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("asd")
+        if(data.isSuccess){
+          alertify.success("User Added!")
+          setUser({
+            firstName:"",
+            lastName:"",
+            userName:"",
+            email:"",
+            password:"",
+            passwordConfirm:""            
+          })
+        }
+        else{
+          alertify.error("User Added!")
+        }
       });
-      alertify.success("User Added!")
+      
   }
   return (
     <div>
@@ -42,6 +67,7 @@ function Register() {
                 name="firstName"
                 placeholder="First Name"
                 onChange={changeHandler}
+                value={user.firstName}
               ></Input>
             </FormGroup>
           </Col>
@@ -52,6 +78,7 @@ function Register() {
                 name="lastName"
                 placeholder="Last Name"
                 onChange={changeHandler}
+                value={user.lastName}
               ></Input>
             </FormGroup>
           </Col>
@@ -60,9 +87,10 @@ function Register() {
           <Input
             id="email"
             name="email"
-            type='email'
+            type="email"
             placeholder="Email"
             onChange={changeHandler}
+            value={user.email}
           ></Input>
         </FormGroup>
         <FormGroup>
@@ -71,6 +99,7 @@ function Register() {
             name="userName"
             placeholder="User Name"
             onChange={changeHandler}
+            value={user.userName}
           ></Input>
         </FormGroup>
         <Row>
@@ -79,20 +108,22 @@ function Register() {
               <Input
                 id="password"
                 name="password"
-                type='password'
+                type="password"
                 placeholder="Password"
                 onChange={changeHandler}
+                value={user.password}
               ></Input>
             </FormGroup>
           </Col>
           <Col sm="6">
             <FormGroup>
               <Input
-                  id="passwordConfirm"
-                  name="passwordConfirm"
-                  type='password'
-                  placeholder="Password Confirm"
+                id="passwordConfirm"
+                name="passwordConfirm"
+                type="password"
+                placeholder="Password Confirm"
                 onChange={changeHandler}
+                value={user.passwordConfirm}
               ></Input>
             </FormGroup>
           </Col>
@@ -105,8 +136,7 @@ function Register() {
         <Col sm="6">
           <NavLink to="/login">Have an accout?</NavLink>
         </Col>
-        <Col sm="6">          
-        </Col>
+        <Col sm="6"></Col>
       </Row>
     </div>
   );

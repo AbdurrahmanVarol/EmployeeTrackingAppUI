@@ -2,11 +2,12 @@
   background-image: url("./images/bg-auth-layout.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
+  background-size:    cover;                
   
 }
 .default{
   background-image: url("./images/bg-default-layout.jpg");
-  background-size:     cover;                
+  background-size:    cover;                
   background-repeat:   no-repeat;
   background-position: center center;   
 }

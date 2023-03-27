@@ -1,3 +1,4 @@
+import alertify from 'alertifyjs';
 import React, { useState,useContext } from 'react'
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Col, Form, FormGroup, Input, Row } from 'reactstrap';
@@ -19,7 +20,7 @@ function Login() {
     event.preventDefault()
     console.log(user)
     console.log("worked")
-    fetch("", {
+    fetch("https://localhost:44333/api/Auth/login", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
@@ -28,12 +29,17 @@ function Login() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if(data.isLoginSuccess){
-
+        console.log("asd")
+        console.log(data)
+        if(data.isSuccess){
           setToken(data.token);
+          navigate("/")
+        }
+        else{
+          alertify.error("Wrong user name or password!")
         }
       });
-      navigate("/")
+      
   }
 
   return (
@@ -52,6 +58,7 @@ function Login() {
           <Input
             id="password"
             name="password"
+            type='password'
             placeholder="Password"
             onChange={changeHandler}
           ></Input>
