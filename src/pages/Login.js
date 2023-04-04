@@ -5,14 +5,14 @@ import { Button, Col, Form, FormGroup, Input, Row } from 'reactstrap';
 import DefaultContext from '../contexts/DefaultContext';
 
 function Login() {
-  const {setToken} = useContext(DefaultContext);
+  const {token,setToken,userRole,setUserRole,departments} = useContext(DefaultContext);
   const [user, setUser] = useState();
   const navigate = useNavigate()
 
   const changeHandler = (event) => {
+    console.log(departments)
     let name = event.target.name;
     let value = event.target.value;
-    console.log(name)
     setUser((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -31,8 +31,9 @@ function Login() {
       .then((data) => {
         console.log("asd")
         console.log(data)
-        if(data.isSuccess){
+        if(data.token){
           setToken(data.token);
+          setUserRole(data.userRole)
           navigate("/")
         }
         else{

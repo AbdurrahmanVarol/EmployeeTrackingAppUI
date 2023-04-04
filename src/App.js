@@ -10,6 +10,7 @@ import Employees from './pages/Employees';
 import EmployeeDetails from './pages/EmployeeDetails';
 import CreateTicket from './pages/CreateTicket';
 import UnAssignedTickets from './pages/UnAssignedTickets';
+import Departments from './pages/Departments';
 
 function App() {
   return (
@@ -17,17 +18,18 @@ function App() {
       <DefaultContextProvider>
         <BrowserRouter>
           <Routes>
+          <Route element={<AuthLayout></AuthLayout>}>
+              <Route index path="/login" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+            </Route>
             <Route element={<DefaultLayout></DefaultLayout>}>
               <Route path='/' element={<Home></Home>}></Route>
               <Route path='/employees' element={<Employees></Employees>}></Route>
               <Route path='/employeeDetails' element={<EmployeeDetails></EmployeeDetails>}></Route>
               <Route path='/createTicket' element={<CreateTicket></CreateTicket>}></Route>
               <Route path='/unassignedTickets' element={<UnAssignedTickets></UnAssignedTickets>}></Route>
-            </Route>
-            <Route element={<AuthLayout></AuthLayout>}>
-              <Route index path="/login" element={<Login />}></Route>
-              <Route path="/register" element={<Register />}></Route>
-            </Route>
+              <Route path='/departments' element={<Departments></Departments>}></Route>
+            </Route>           
           </Routes>
         </BrowserRouter>
       </DefaultContextProvider>

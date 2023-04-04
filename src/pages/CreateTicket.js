@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap'
 
 function CreateTicket() {
-  const [ticket,setTicket] =useState({description:"",department:"1"})
+  const [ticket,setTicket] =useState()
 
   const changeHandler = (event) =>{
     let name = event.target.name
@@ -13,7 +13,6 @@ function CreateTicket() {
   const submitHandler = (event)=>{
     event.preventDefault()
     console.log(ticket)
-    setTicket({description:"",department:"1"})
     alertify.success("Ticket created")
   }
   return (
@@ -26,7 +25,6 @@ function CreateTicket() {
             name="description"
             type="textarea"
             placeholder="Desctiption"
-            value={ticket.description}
             onChange={changeHandler}
           ></Input>
         </FormGroup>
@@ -37,7 +35,6 @@ function CreateTicket() {
               name="department"
               type="select"
               onChange={changeHandler}
-              value={ticket.department}
             >
               <option defaultValue value="1">Department 1</option>
               <option value="2">Department 2</option>

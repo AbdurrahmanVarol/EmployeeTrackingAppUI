@@ -52,22 +52,40 @@ function Navi() {
                 Your Completed Tickets
               </NavLink>
             </NavItem>
-            {userRole == 1
-              ? [(
-                  <NavItem>
+            {userRole == 1 ? (
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Admin Operations
+                </DropdownToggle>
+                <DropdownMenu end>
+                  <DropdownItem>
                     <NavLink className="nav-link" to="/employees" state={{}}>
                       Employees
                     </NavLink>
-                  </NavItem>
-              ),
-              (
-                  <NavItem>
-                    <NavLink className="nav-link" to="/unassignedTickets" state={{}}>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink
+                      className="nav-link"
+                      to="/unassignedTickets"
+                      state={{}}
+                    >
                       Unassigned Tickets
                     </NavLink>
-                  </NavItem>
-              )]
-              : ""}
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavLink
+                      className="nav-link"
+                      to="/departments"
+                      state={{}}
+                    >
+                      Departments
+                    </NavLink>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            ) : (
+              ""
+            )}           
           </Nav>
           <Button
             color="primary"
