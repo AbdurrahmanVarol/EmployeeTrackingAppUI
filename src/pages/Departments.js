@@ -4,20 +4,22 @@ import { Badge, Button, Form, FormGroup, Input, ListGroup, ListGroupItem, Table 
 import alertify from 'alertifyjs';
 
 function Departments() {
-    const{departments,setDepartments,token} = useContext(DefaultContext)
+    const{token} = useContext(DefaultContext)
 
     const[department,setDepartment] = useState({departmentName:""})
+    const [departments, setDepartments] = useState([]);
 
+    const loadDepartments= ()=>{
+      fetch("https://localhost:44333/api/departments")
+      .then((response) => response.json())
+      .then((data) => {
+          console.log(data)
+          setDepartments([...data])
+      });
+    }
     useEffect(()=>{
-        console.log("asd")
-        if(!departments){
-            fetch("https://localhost:44333/api/departments")
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
-                    setDepartments([...data])
-                    alertify.success("Department Added!")
-                });
+        if(!departments || departments.length == 0){
+          loadDepartments()
             }
             console.log(departments)
     },[])
@@ -45,6 +47,7 @@ function Departments() {
                 setDepartments(data.departments)
                 alertify.success("Department Added!")
             });
+            loadDepartments();
     }
 
   
@@ -66,14 +69,17 @@ function Departments() {
       </Form>
       <hr></hr>
       <h3>Departments</h3>
-      <ListGroup>
-        {
-            departments.map(d =>(
-                <ListGroupItem key={d.id}><Badge color='danger'>X</Badge> {d.departmentName}</ListGroupItem>
-            ))
-        }
-       
-      </ListGroup>
+      {!departments ? (
+        <h4>There aren't any department</h4>
+      ) : (
+        <ListGroup>
+          {departments.map((d) => (
+            <ListGroupItem key={d.id}>
+              <Badge color="danger">X</Badge> {d.departmentName}
+            </ListGroupItem>
+          ))}
+        </ListGroup>
+      )}
     </div>
   );
 }

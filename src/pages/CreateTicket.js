@@ -31,11 +31,16 @@ function CreateTicket() {
          "Authorization" : `Bearer ${token}`
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+          if(response.status == 200){
+            alertify.success("Tictet Created!")
+          }
+        
+        return response.json()
+      })
       .then((data) => {
-          alertify.success("Department Added!")
       });
-    alertify.success("Ticket created")
+    
   }
   return (
     <div>

@@ -11,6 +11,8 @@ import EmployeeDetails from './pages/EmployeeDetails';
 import CreateTicket from './pages/CreateTicket';
 import UnAssignedTickets from './pages/UnAssignedTickets';
 import Departments from './pages/Departments';
+import CompletedTickets from './pages/CompletedTickets';
+import Tickets from './pages/Tickets';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
               <Route path='/employeeDetails' element={<EmployeeDetails></EmployeeDetails>}></Route>
               <Route path='/createTicket' element={<CreateTicket></CreateTicket>}></Route>
               <Route path='/unassignedTickets' element={<UnAssignedTickets></UnAssignedTickets>}></Route>
+              <Route path='/tickets' element={<Tickets></Tickets>}></Route>
+              <Route path='/completedTickets' element={<CompletedTickets></CompletedTickets>}></Route>
               <Route path='/departments' element={<Departments></Departments>}></Route>
             </Route>           
           </Routes>

@@ -18,7 +18,7 @@ import {
 import DefaultContext from "../contexts/DefaultContext";
 
 function Navi() {
-    const {userRole} = useContext(DefaultContext);
+    const {userRole,setToken} = useContext(DefaultContext);
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate()
   
@@ -43,12 +43,12 @@ function Navi() {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="nav-link" to="/" state={{}}>
+              <NavLink className="nav-link" to="/tickets" state={{}}>
                 Your Tickets
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="nav-link" to="/" state={{}}>
+              <NavLink className="nav-link" to="/completedTickets" state={{}}>
                 Your Completed Tickets
               </NavLink>
             </NavItem>
@@ -90,6 +90,7 @@ function Navi() {
           <Button
             color="primary"
             onClick={() => {
+              setToken(undefined)
               navigate("/login");
             }}
           >
